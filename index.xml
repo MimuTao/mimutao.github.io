@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Biu~</title>
-    <link>http://mimutao.github.io/</link>
+    <link>https://mimutao.github.io/</link>
     <description>Recent content on Biu~</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 05 Sep 2017 10:49:59 +0800</lastBuildDate>
     
-	<atom:link href="http://mimutao.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://mimutao.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Brief introduction about me</title>
-      <link>http://mimutao.github.io/post/introduction/</link>
+      <link>https://mimutao.github.io/post/introduction/</link>
       <pubDate>Tue, 05 Sep 2017 10:49:59 +0800</pubDate>
       
-      <guid>http://mimutao.github.io/post/introduction/</guid>
+      <guid>https://mimutao.github.io/post/introduction/</guid>
       <description>Inroduction: Hey, My name is lenus an system engineer.
 Follows are some basic information of me.
 Name: MimuTao
