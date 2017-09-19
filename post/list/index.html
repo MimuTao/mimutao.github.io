@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Biu~</title>
+        <title>Basic study about List</title>
         <style>
 
     html body {
@@ -59,9 +59,6 @@
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
  <meta name="generator" content="Hugo 0.26" />
         
-        <link href="http://mimutao.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Biu~" />
-        <link href="http://mimutao.github.io/index.xml" rel="feed" type="application/rss+xml" title="Biu~" />
-        
     </head>
 
     <body>
@@ -72,7 +69,7 @@
 
                 <div class="navbar-header">
 
-                    <a class="navbar-brand visible-xs" href="#">Biu~</a>
+                    <a class="navbar-brand visible-xs" href="#">Basic study about List</a>
 
                     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="icon-bar"></span>
@@ -117,13 +114,167 @@
 
 <main>
 
-    <div class="intro">
+    <div class="item">
 
-        <h1>Biu~</h1>
+    
+    
+    
 
-        <h2>Lenus&rsquo;s personal website.</h2>
+    
+    
 
-    </div>
+    <h4><a href="/post/list/">Basic study about List</a></h4>
+    <h5>September 19, 2017</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h3 id="list-use-array-and-c">List: Use array and c</h3>
+
+<hr />
+
+<h4 id="list-h">List.h</h4>
+
+<hr />
+
+<pre><code>    #ifndef LIST_H
+    #define LIST_H
+
+    #include&lt;stdio.h&gt;
+    #include&lt;malloc.h&gt;
+    #include&lt;stdbool.h&gt;
+    #define Max_size 100    // 设定线性表的大小 
+
+    typedef int Element_type;  // 设置变量类型 
+    typedef struct Node *List;  // 定义指针 
+
+    struct Node{
+        Element_type data[Max_size];
+        int end_pos;
+    };
+
+    // 初始化 
+    List Init(){
+        List plist;
+        plist = (List)malloc(sizeof(struct Node));
+        plist-&gt;end_pos = -1;
+        return plist; 
+    }
+    // 查找
+    int Find( Element_type x, List plist){
+        int i=0;
+        while(i&lt;=plist-&gt;end_pos){
+            if(x == plist-&gt;data[i]){
+                printf(&quot;find it\n&quot;);
+                return i;
+            }
+            ++i;
+        }
+        printf(&quot;not find it.\n&quot;);
+        return -1;    // 倘若没有找到这个元素，那么我们返回-1作为没有找到的标记。 
+    }
+
+    // 插入 -&gt;插入结束后，元素在第i的位置上 
+    void Insert(int pos,Element_type x,List plist){
+        if(pos&lt;0 || pos&gt;Max_size || pos&gt;plist-&gt;end_pos+1){
+            printf(&quot;The position is not right.\n&quot;);    // 如果插入的位置有问题
+            return;
+        }
+        int i = plist-&gt;end_pos+1;
+        while(i&gt;pos){   //先让pos后面的元素往后移动一个位置  pose上的元素暂时不移动 
+            plist-&gt;data[i] = plist-&gt;data[i-1];
+            --i; 
+        } 
+        plist-&gt;data[pos] = x;    //表的大小应该 +1 
+        ++(plist-&gt;end_pos);
+    }
+
+    // 头插入
+    void Unshift(Element_type x,List plist){
+        if(plist-&gt;end_pos&gt;=Max_size){
+            printf(&quot;The list is full, can't unshift element in the list.&quot;);
+            return;
+        }
+        int i;
+        for(i=plist-&gt;end_pos;i&gt;=0;i--){
+            plist-&gt;data[i+1]=plist-&gt;data[i]; 
+        }
+        plist-&gt;data[0]=x;
+        ++plist-&gt;end_pos;
+
+    } 
+    // 尾插入
+    void Push(Element_type x, List plist){
+        if(plist-&gt;end_pos&gt;=Max_size){
+            printf(&quot;The list is full, can't not push element in the list.&quot;);
+            return;
+        }
+        plist-&gt;data[plist-&gt;end_pos+1]=x;
+        ++plist-&gt;end_pos;
+    } 
+
+    // 删除
+    Element_type Remove(int pos,List plist){
+        if(pos&lt;0 || pos&gt;plist-&gt;end_pos){
+            printf(&quot;The pos is not valid.\n&quot;);
+            return; 
+        }   
+        int i;
+        Element_type ret = plist-&gt;data[pos];
+        for(i = pos; i&lt;plist-&gt;end_pos; i++){
+            plist-&gt;data[i]=plist-&gt;data[i+1];
+        }
+        --(plist-&gt;end_pos);    // 表的大小应该-1
+        return ret;  
+    }
+
+    // 头删
+    void Shift(List plist){
+        if(plist-&gt;end_pos&lt;0){
+            printf(&quot;The list is empty, have no emement to unshift.&quot;);
+            return;
+        }
+        int i=0;
+        for(i;i&lt;plist-&gt;end_pos;++i){
+            plist-&gt;data[i]=plist-&gt;data[i+1];
+        }
+        --plist-&gt;end_pos;
+    } 
+
+    // 尾删
+    void Pop(List plist){
+        if(plist-&gt;end_pos&lt;0){
+            printf(&quot;The list is empty, have no element to Pop.&quot;);
+        }
+        --plist-&gt;end_pos;    // let the size of list decrease one;
+    } 
+
+    // 得到List的大小
+    int Lsize(List plist){
+        return plist-&gt;end_pos+1;
+    } 
+
+    // traverse-&gt;遍历
+    void Traverse(List plist){
+        int pos=0;
+        for(pos; pos&lt;=plist-&gt;end_pos; ++pos){
+            printf(&quot;%d\n&quot;,plist-&gt;data[pos]);
+        }
+    } 
+
+    #endif
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
 
 </main>
 
