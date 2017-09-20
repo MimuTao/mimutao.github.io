@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>POSTs</title>
+        <title>Basic study about Stack with linklist</title>
         <style>
 
     html body {
@@ -59,9 +59,6 @@
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
  <meta name="generator" content="Hugo 0.26" />
         
-        <link href="http://mimutao.github.io/post/index.xml" rel="alternate" type="application/rss+xml" title="Biu~" />
-        <link href="http://mimutao.github.io/post/index.xml" rel="feed" type="application/rss+xml" title="Biu~" />
-        
     </head>
 
     <body>
@@ -72,7 +69,7 @@
 
                 <div class="navbar-header">
 
-                    <a class="navbar-brand visible-xs" href="#">POSTs</a>
+                    <a class="navbar-brand visible-xs" href="#">Basic study about Stack with linklist</a>
 
                     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="icon-bar"></span>
@@ -117,9 +114,7 @@
 
 <main>
 
-    <h2>POSTs</h2>
-
-     <div class="item">
+    <div class="item">
 
     
     
@@ -133,67 +128,117 @@
     
 
 </div>
-  <div class="item">
 
-    
-    
-    
 
-    
-    
+    <br> <div class="text-justify">
 
-    <h4><a href="/post/stack_array/">Biaic study about Stack with array</a></h4>
-    <h5>September 20, 2017</h5>
-    
+<h3 id="stack-use-c-and-linklist">Stack: Use c and linklist</h3>
 
+<h4 id="stack-h">stack.h</h4>
+
+<pre><code>    #ifndef STACK_H
+    #define STACK_H
+    #include&lt;stdio.h&gt;
+    #include&lt;malloc.h&gt;
+    #include&lt;stdbool.h&gt;
+
+    typedef int Element_type;
+    typedef struct Node *Stack;
+
+    struct Node{
+        Element_type data;
+        Stack next;
+    };
+
+    // Initilcation.
+    Stack Init(){
+        Stack stack = (Stack)malloc(sizeof(struct Node));
+        stack-&gt;next = NULL;
+        return stack;
+    }
+
+    // Push
+    Stack Push(Element_type x, Stack stack){
+        Stack stack_top = (Stack)malloc(sizeof(struct Node));
+        stack_top-&gt;data = x;
+        stack_top-&gt;next = stack;
+        return stack_top;
+    }
+
+    // Pop
+    Stack Pop(Stack stack){
+        if(stack-&gt;next == NULL){
+            printf(&quot;The stack is empty, have no element to pop.\n&quot;);
+            return NULL;
+        }
+        Stack temp = stack;
+        stack = stack-&gt;next; 
+        free(temp);    // release the memery of top element of stack.
+        return stack;
+    }
+
+    // The size of stack
+    int Size(Stack stack){
+        int i = 0;
+        while(stack-&gt;next != NULL){
+            i++;
+            stack = stack-&gt;next;
+        }
+        return i;
+    }
+
+    // Judge if the stack is empty.
+    bool is_empty(Stack stack){
+        return stack-&gt;next==NULL?true:false;
+    }
+
+    // Traverse
+    void Traverse(Stack stack){
+        int i=1;
+        while(stack-&gt;next != NULL){
+            printf(&quot;The %dth element in the stack is %d.\n&quot;,i,stack-&gt;data);
+            stack = stack-&gt;next;
+        }
+    }
+
+    #endif
+</code></pre>
+
+<hr />
+
+<p>#### main.c
+        #include &ldquo;stack.h&rdquo;</p>
+
+<pre><code>    int main(void){
+        printf(&quot;INITILATION.\n&quot;);
+        Stack m_stack = Init();
+        printf(&quot;The size of stack is %d.\n&quot;,Size(m_stack));
+        printf(&quot;Push some element into stack.\n&quot;);
+        int i = 0;
+        for(i;i&lt;4;++i){
+            m_stack = Push(i,m_stack);
+        }
+        Traverse(m_stack);
+
+        printf(&quot;Pop some elements out of stack.\n&quot;);
+        for(i=0;i!=2;++i){
+            m_stack = Pop(m_stack);
+        }
+        printf(&quot;The size of stack now is %d.\n&quot;,Size(m_stack));
+        Traverse(m_stack); 
+
+    }
+</code></pre>
 </div>
-  <div class="item">
-
-    
-    
-    
 
     
     
 
-    <h4><a href="/post/linklist/">Basic study about Linklist</a></h4>
-    <h5>September 20, 2017</h5>
-    
-
-</div>
-  <div class="item">
-
-    
-    
     
 
     
-    
-
-    <h4><a href="/post/list/">Basic study about List</a></h4>
-    <h5>September 19, 2017</h5>
-    
-
-</div>
-  <div class="item">
-
-    
-    
-    
-
-    
-    
-
-    <h4><a href="/post/introduction/">Brief introduction about me</a></h4>
-    <h5>September 5, 2017</h5>
-    
-
-</div>
- 
 
 </main>
-
-
 
         <footer>
 
