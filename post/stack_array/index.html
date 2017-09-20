@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>POSTs</title>
+        <title>Biaic study about Stack with array</title>
         <style>
 
     html body {
@@ -59,9 +59,6 @@
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
  <meta name="generator" content="Hugo 0.26" />
         
-        <link href="http://mimutao.github.io/post/index.xml" rel="alternate" type="application/rss+xml" title="Biu~" />
-        <link href="http://mimutao.github.io/post/index.xml" rel="feed" type="application/rss+xml" title="Biu~" />
-        
     </head>
 
     <body>
@@ -72,7 +69,7 @@
 
                 <div class="navbar-header">
 
-                    <a class="navbar-brand visible-xs" href="#">POSTs</a>
+                    <a class="navbar-brand visible-xs" href="#">Biaic study about Stack with array</a>
 
                     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="icon-bar"></span>
@@ -117,9 +114,7 @@
 
 <main>
 
-    <h2>POSTs</h2>
-
-     <div class="item">
+    <div class="item">
 
     
     
@@ -133,53 +128,90 @@
     
 
 </div>
-  <div class="item">
 
-    
-    
-    
 
-    
-    
+    <br> <div class="text-justify">
 
-    <h4><a href="/post/linklist/">Basic study about Linklist</a></h4>
-    <h5>September 20, 2017</h5>
-    
+<h3 id="stack-use-c-and-array">Stack: Use c and array</h3>
 
+<h4 id="stack-h">stack.h</h4>
+
+<pre><code>    #ifndef STACK_H
+    #define STACK_H
+    #include&lt;stdio.h&gt;
+    #include&lt;stdbool.h&gt;
+    #include&lt;malloc.h&gt;
+    #define Max_size 100
+
+    typedef int Element_type;
+    typedef struct Node *Stack;
+
+    struct Node{
+        Element_type data[Max_size];
+        int Top;
+    };
+
+    // Init 
+    Stack Init(){
+        Stack stack = (Stack)malloc(sizeof(struct Node));
+        stack-&gt;Top = -1;    // use top=-1 to express the stack is empty. 
+        return stack;
+    }
+
+    // is_empty
+    bool is_empty(Stack stack){
+        return stack-&gt;Top==-1?true:false; 
+    }
+
+    // is_full
+    bool is_full(Stack stack){
+        return stack-&gt;Top==Max_size-1?true:false;
+    }
+
+    // Push
+    void Push(Element_type x, Stack stack){
+        if(is_full(stack)){
+            printf(&quot;The stack is full, have no room to push.\n&quot;);
+            return;
+        }
+        ++stack-&gt;Top;
+        stack-&gt;data[stack-&gt;Top] = x;
+    } 
+
+    // Pop 
+    void Pop(Stack stack){
+        if(is_empty(stack)){
+            printf(&quot;The stack is empty, have no element to pop.\n&quot;);
+            return;
+        }
+        stack-&gt;Top--;
+    }
+
+    // The size of the stack.
+    int Size(Stack stack){
+        return stack-&gt;Top+1;
+    }
+
+    // Traverse
+    void Traverse(Stack stack){
+        int i;
+        for(i=0;i&lt;=stack-&gt;Top;++i){
+            printf(&quot;The %d element in stack is %d.\n&quot;,i+1,stack-&gt;data[i]);
+        }
+    }
+
+    #endif
+</code></pre>
 </div>
-  <div class="item">
-
-    
-    
-    
 
     
     
 
-    <h4><a href="/post/list/">Basic study about List</a></h4>
-    <h5>September 19, 2017</h5>
-    
-
-</div>
-  <div class="item">
-
-    
-    
     
 
     
-    
-
-    <h4><a href="/post/introduction/">Brief introduction about me</a></h4>
-    <h5>September 5, 2017</h5>
-    
-
-</div>
- 
 
 </main>
-
-
 
         <footer>
 

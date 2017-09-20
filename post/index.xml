@@ -6,10 +6,19 @@
     <description>Recent content in POSTs on Biu~</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Sep 2017 10:56:53 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 20 Sep 2017 19:38:57 +0800</lastBuildDate>
     
 	<atom:link href="http://mimutao.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Biaic study about Stack with array</title>
+      <link>http://mimutao.github.io/post/stack_array/</link>
+      <pubDate>Wed, 20 Sep 2017 19:38:57 +0800</pubDate>
+      
+      <guid>http://mimutao.github.io/post/stack_array/</guid>
+      <description>Stack: Use c and array stack.h  #ifndef STACK_H #define STACK_H #include&amp;lt;stdio.h&amp;gt; #include&amp;lt;stdbool.h&amp;gt; #include&amp;lt;malloc.h&amp;gt; #define Max_size 100 typedef int Element_type; typedef struct Node *Stack; struct Node{ Element_type data[Max_size]; int Top; }; // Init Stack Init(){ Stack stack = (Stack)malloc(sizeof(struct Node)); stack-&amp;gt;Top = -1; // use top=-1 to express the stack is empty. return stack; } // is_empty bool is_empty(Stack stack){ return stack-&amp;gt;Top==-1?true:false; } // is_full bool is_full(Stack stack){ return stack-&amp;gt;Top==Max_size-1?</description>
+    </item>
     
     <item>
       <title>Basic study about Linklist</title>
