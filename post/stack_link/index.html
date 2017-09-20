@@ -225,10 +225,11 @@
 
 <hr />
 
-<p>#### main.c
-        #include &ldquo;stack.h&rdquo;</p>
+<p>#### main.c</p>
 
-<pre><code>    int main(void){
+<pre><code>    #include &quot;stack.h&quot;
+
+    int main(void){
         printf(&quot;INITILATION.\n&quot;);
         Stack m_stack = Init();
         printf(&quot;The size of stack is %d.\n&quot;,Size(m_stack));
