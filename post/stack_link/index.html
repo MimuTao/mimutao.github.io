@@ -157,24 +157,43 @@
         return stack;
     }
 
-    // Push
-    Stack Push(Element_type x, Stack stack){
-        Stack stack_top = (Stack)malloc(sizeof(struct Node));
-        stack_top-&gt;data = x;
-        stack_top-&gt;next = stack;
-        return stack_top;
+    //// Push
+    //Stack Push(Element_type x, Stack stack){
+    //  Stack stack_top = (Stack)malloc(sizeof(struct Node));
+    //  stack_top-&gt;data = x;
+    //  stack_top-&gt;next = stack;
+    //  return stack_top;
+    //}
+
+    // Push a better way.
+    void Push(Element_type x, Stack stack){
+        Stack temp = (Stack)malloc(sizeof(struct Node));
+        temp-&gt;data = x;
+        temp-&gt;next = stack-&gt;next;
+        stack-&gt;next = temp; 
     }
 
-    // Pop
-    Stack Pop(Stack stack){
+    //// Pop
+    //Stack Pop(Stack stack){
+    //  if(stack-&gt;next == NULL){
+    //      printf(&quot;The stack is empty, have no element to pop.\n&quot;);
+    //      return NULL;
+    //  }
+    //  Stack temp = stack;
+    //  stack = stack-&gt;next; 
+    //  free(temp);    // release the memery of top element of stack.
+    //  return stack;
+    //}
+
+    // Pop another way.
+    void Pop(Stack stack){
         if(stack-&gt;next == NULL){
             printf(&quot;The stack is empty, have no element to pop.\n&quot;);
-            return NULL;
-        }
-        Stack temp = stack;
-        stack = stack-&gt;next; 
-        free(temp);    // release the memery of top element of stack.
-        return stack;
+            return;
+        } 
+        Stack temp = stack-&gt;next;
+        stack-&gt;next = temp-&gt;next;
+        free(temp); 
     }
 
     // The size of stack
@@ -200,9 +219,9 @@
             stack = stack-&gt;next;
         }
     }
-
-    #endif
 </code></pre>
+
+<p>#endif</p>
 
 <hr />
 
@@ -216,13 +235,13 @@
         printf(&quot;Push some element into stack.\n&quot;);
         int i = 0;
         for(i;i&lt;4;++i){
-            m_stack = Push(i,m_stack);
+            Push(i,m_stack);
         }
         Traverse(m_stack);
 
         printf(&quot;Pop some elements out of stack.\n&quot;);
         for(i=0;i!=2;++i){
-            m_stack = Pop(m_stack);
+            Pop(m_stack);
         }
         printf(&quot;The size of stack now is %d.\n&quot;,Size(m_stack));
         Traverse(m_stack); 

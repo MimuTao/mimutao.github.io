@@ -17,7 +17,7 @@
       <pubDate>Wed, 20 Sep 2017 21:05:45 +0800</pubDate>
       
       <guid>http://mimutao.github.io/post/stack_link/</guid>
-      <description>Stack: Use c and linklist stack.h  #ifndef STACK_H #define STACK_H #include&amp;lt;stdio.h&amp;gt; #include&amp;lt;malloc.h&amp;gt; #include&amp;lt;stdbool.h&amp;gt; typedef int Element_type; typedef struct Node *Stack; struct Node{ Element_type data; Stack next; }; // Initilcation. Stack Init(){ Stack stack = (Stack)malloc(sizeof(struct Node)); stack-&amp;gt;next = NULL; return stack; } // Push Stack Push(Element_type x, Stack stack){ Stack stack_top = (Stack)malloc(sizeof(struct Node)); stack_top-&amp;gt;data = x; stack_top-&amp;gt;next = stack; return stack_top; } // Pop Stack Pop(Stack stack){ if(stack-&amp;gt;next == NULL){ printf(&amp;quot;The stack is empty, have no element to pop.</description>
+      <description>Stack: Use c and linklist stack.h  #ifndef STACK_H #define STACK_H #include&amp;lt;stdio.h&amp;gt; #include&amp;lt;malloc.h&amp;gt; #include&amp;lt;stdbool.h&amp;gt; typedef int Element_type; typedef struct Node *Stack; struct Node{ Element_type data; Stack next; }; // Initilcation. Stack Init(){ Stack stack = (Stack)malloc(sizeof(struct Node)); stack-&amp;gt;next = NULL; return stack; } //// Push //Stack Push(Element_type x, Stack stack){ // Stack stack_top = (Stack)malloc(sizeof(struct Node)); // stack_top-&amp;gt;data = x; // stack_top-&amp;gt;next = stack; // return stack_top; //} // Push a better way.</description>
     </item>
     
     <item>
