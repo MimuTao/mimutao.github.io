@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>POSTs</title>
+        <title>Basic study about Queue with array</title>
         <style>
 
     html body {
@@ -59,9 +59,6 @@
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
  <meta name="generator" content="Hugo 0.26" />
         
-        <link href="http://mimutao.github.io/post/index.xml" rel="alternate" type="application/rss+xml" title="Biu~" />
-        <link href="http://mimutao.github.io/post/index.xml" rel="feed" type="application/rss+xml" title="Biu~" />
-        
     </head>
 
     <body>
@@ -72,7 +69,7 @@
 
                 <div class="navbar-header">
 
-                    <a class="navbar-brand visible-xs" href="#">POSTs</a>
+                    <a class="navbar-brand visible-xs" href="#">Basic study about Queue with array</a>
 
                     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="icon-bar"></span>
@@ -117,9 +114,7 @@
 
 <main>
 
-    <h2>POSTs</h2>
-
-     <div class="item">
+    <div class="item">
 
     
     
@@ -133,79 +128,159 @@
     
 
 </div>
-  <div class="item">
 
-    
-    
-    
 
-    
-    
+    <br> <div class="text-justify">
 
-    <h4><a href="/post/stack_link/">Basic study about Stack with linklist</a></h4>
-    <h5>September 20, 2017</h5>
-    
+<h3 id="queue-use-c-and-array">Queue: Use c and array.</h3>
 
+<h4 id="queue-h">queue.h</h4>
+
+<pre><code>    #ifndef _QUEUE_H
+    #define _QUEUE_H
+    #include&lt;stdio.h&gt;
+    #include&lt;stdbool.h&gt;
+    #include&lt;malloc.h&gt;
+
+    typedef int Element_type;
+    typedef struct Node *Queue;
+    struct Node{
+        int Max_size;    // Max_size is the capacity of the array.
+        int front;
+        int rear;
+        int size;
+        Element_type *data;    // We use data is an array. the max_size of data(array) is Max_size.
+    }; 
+
+    // function declaration.
+    int size(Queue queue);
+    bool is_empty(Queue queue);
+    bool is_full(Queue queue);
+    void Enqueue(Element_type x, Queue queue);
+    Element_type Dequeue(Queue queue);
+    Queue MakeQueue(int max_size);
+    void Traverse(Queue queue);
+
+    #endif
+</code></pre>
+
+<hr />
+
+<h4 id="queue-c">queue.c</h4>
+
+<pre><code>     #include &quot;queue.h&quot;
+
+    // create a new queue.
+    Queue MakeQueue(int max_size){
+        printf(&quot;INITILATION.\n&quot;);
+        Queue queue = (Queue)malloc(sizeof(struct Node));
+        queue-&gt;data = (Element_type *)malloc(max_size * sizeof(Element_type));
+        queue-&gt;front = 0;
+        queue-&gt;rear = 0;
+        queue-&gt;size = 0;
+        queue-&gt;Max_size = max_size;
+        return queue;
+    }
+
+    int size(Queue queue){
+        return queue-&gt;size;
+    }
+
+    bool is_full(Queue queue){
+        return queue-&gt;size == queue-&gt;Max_size;
+    }
+
+    bool is_empty(Queue queue){
+        return queue-&gt;size == 0;
+    }
+
+    // Enqueue means push the item to the rear of the queue.
+    void Enqueue(Element_type x, Queue queue){
+        if(is_full(queue)){
+            printf(&quot;The queue is full, have no space to insert data.\n&quot;);
+            return;
+        }
+        queue-&gt;rear = (queue-&gt;rear+1)%queue-&gt;Max_size;    // if to the end of the data, rear return to the beginning of array data.
+        queue-&gt;size++;    // increase the size of queue.
+        queue-&gt;data[queue-&gt;rear] = x;   
+    }
+
+    Element_type Dequeue(Queue queue){
+        if(is_empty(queue)){
+            printf(&quot;The queue is empty, have no element to dequeue.\n&quot;);
+            return -1;
+        }
+        Element_type ret = queue-&gt;data[queue-&gt;front];
+        queue-&gt;front = (queue-&gt;front+1)%queue-&gt;Max_size;
+        queue-&gt;size--;
+        return ret;
+    }
+
+    void Traverse(Queue queue){
+        if(is_empty(queue)){
+            printf(&quot;The queue is empty.\n&quot;);
+            return;
+        }
+
+        int pos = queue-&gt;front;
+        int i;
+        for(i=0; i!=queue-&gt;size; ++i){
+            pos = (pos+1)%queue-&gt;Max_size;
+            printf(&quot;The %dth element in queue is %d.\n&quot;,i+1,queue-&gt;data[pos]);
+        }
+    }
+</code></pre>
+
+<hr />
+
+<h4 id="main-c">main.c</h4>
+
+<pre><code>main.c for test.
+
+    #include &quot;queue.h&quot;
+
+    int main(void){
+        Queue m_queue = MakeQueue(10);
+        printf(&quot;The size of queue is %d.\n&quot;,m_queue-&gt;size);
+        printf(&quot;Now the fornt is %d and the rear is %d.\n&quot;,m_queue-&gt;front,m_queue-&gt;rear);
+        int i;
+
+        for(i=0;i!=14;i++){
+            Enqueue(i,m_queue);
+        }
+        printf(&quot;Thes size of queue is %d.\n&quot;,m_queue-&gt;size);
+        printf(&quot;Now the fornt is %d and the rear is %d.\n&quot;,m_queue-&gt;front,m_queue-&gt;rear);
+
+        printf(&quot;Now the fornt is %d and the rear is %d.\n&quot;,m_queue-&gt;front,m_queue-&gt;rear);
+        Traverse(m_queue);
+        printf(&quot;Dequeue some elements out of the queue.\n&quot;);
+        for (i=0; i!=13;++i){
+            Dequeue(m_queue);
+        }
+        Traverse(m_queue);
+        printf(&quot;Now the fornt is %d and the rear is %d.\n&quot;,m_queue-&gt;front,m_queue-&gt;rear);
+        Traverse(m_queue);
+        printf(&quot;Enqueue some new element into the queue.\n&quot;);
+        for(i=10;i!=14;i++){
+            Enqueue(i,m_queue);
+        }
+        Traverse(m_queue);
+        printf(&quot;Now the fornt is %d and the rear is %d.\n&quot;,m_queue-&gt;front,m_queue-&gt;rear);
+
+
+        return 0;
+    }
+</code></pre>
 </div>
-  <div class="item">
-
-    
-    
-    
 
     
     
 
-    <h4><a href="/post/stack_array/">Biaic study about Stack with array</a></h4>
-    <h5>September 20, 2017</h5>
-    
-
-</div>
-  <div class="item">
-
-    
-    
     
 
     
-    
-
-    <h4><a href="/post/linklist/">Basic study about Linklist</a></h4>
-    <h5>September 20, 2017</h5>
-    
-
-</div>
-  <div class="item">
-
-    
-    
-    
-
-    
-    
-
-    <h4><a href="/post/list/">Basic study about List</a></h4>
-    <h5>September 19, 2017</h5>
-    
-
-</div>
- 
 
 </main>
-
-
-
-<div class="pages">
-
-     
-    <a class="icon pages-icon" href="/post/page/2/" rel="next">
-        <i class="fa fa-arrow-right"></i>
-    </a>
-    
-
-</div>
-
-
 
         <footer>
 

@@ -6,10 +6,19 @@
     <description>Recent content on Biu~</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Sep 2017 21:05:45 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 21 Sep 2017 19:38:12 +0800</lastBuildDate>
     
 	<atom:link href="http://mimutao.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Basic study about Queue with array</title>
+      <link>http://mimutao.github.io/post/queue_array/</link>
+      <pubDate>Thu, 21 Sep 2017 19:38:12 +0800</pubDate>
+      
+      <guid>http://mimutao.github.io/post/queue_array/</guid>
+      <description>Queue: Use c and array. queue.h  #ifndef _QUEUE_H #define _QUEUE_H #include&amp;lt;stdio.h&amp;gt; #include&amp;lt;stdbool.h&amp;gt; #include&amp;lt;malloc.h&amp;gt; typedef int Element_type; typedef struct Node *Queue; struct Node{ int Max_size; // Max_size is the capacity of the array. int front; int rear; int size; Element_type *data; // We use data is an array. the max_size of data(array) is Max_size. }; // function declaration. int size(Queue queue); bool is_empty(Queue queue); bool is_full(Queue queue); void Enqueue(Element_type x, Queue queue); Element_type Dequeue(Queue queue); Queue MakeQueue(int max_size); void Traverse(Queue queue); #endif  queue.</description>
+    </item>
     
     <item>
       <title>Basic study about Stack with linklist</title>
