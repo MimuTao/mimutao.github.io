@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Basic study about queue with linklist</title>
+        <style>
+
+    html body {
+        font-family: Jura, sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: red;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jura">
+
+
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/swift.min.js"></script>  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/php.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.26" />
+        
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Basic study about queue with linklist</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">HOME</a></li>
+                            
+                                <li><a href="/post/">POST</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="taoyueyue54@qq.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/MimuTao/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/MimuTao/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/MimuTao/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/queue_link/">Basic study about queue with linklist</a></h4>
+    <h5>September 21, 2017</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h3 id="queue-use-c-and-linklist">Queue: Use c and linklist</h3>
+
+<h4 id="queue-h">queue.h</h4>
+
+<pre><code>    #ifndef _QUEUE_H
+    #define _QUEUE_H
+
+    #include&lt;stdio.h&gt;
+    #include&lt;stdbool.h&gt;
+    #include&lt;malloc.h&gt;
+
+    typedef int Element_type;
+    typedef struct Node *P_Node; 
+    typedef  struct QNode *Queue;
+
+    struct Node{
+        Element_type data;
+        P_Node next; 
+    };
+    struct QNode{
+        P_Node front;    // front is a pointer to the front of queue.
+        P_Node rear;    // rear is a pointer to the rear of the queue.
+    }; 
+
+    // function declaration
+    Queue MakeQueue();
+    int size(Queue queue);
+    bool is_empty(Queue queue);
+    void Enqueue(Element_type x, Queue queue);
+    Element_type Dequeue(Queue queue);
+    void Empty(Queue queue);
+    void Traverse(Queue queue);
+
+    #endif
+</code></pre>
+
+<hr />
+
+<h4 id="queue-c">queue.c</h4>
+
+<pre><code>    #include &quot;queue.h&quot;
+
+    // initilaction of the queue.
+    Queue MakeQueue(){
+        Queue queue = (Queue)malloc(sizeof(struct QNode));
+        queue-&gt;front = (P_Node)malloc(sizeof(struct Node));
+        queue-&gt;rear = (P_Node)malloc(sizeof(struct Node));
+        queue-&gt;front-&gt;next = NULL;
+        queue-&gt;rear-&gt;next = NULL;
+        return queue;
+    }
+
+    // get the size of the queue.
+    int size(Queue queue){
+        int i = 0;
+        P_Node temp = queue-&gt;front;
+        while(temp-&gt;next != NULL){
+            ++i;
+            temp = temp-&gt;next; 
+        }
+        return i;
+    }
+
+    // judge if the queue is empty.
+    bool is_empty(Queue queue){
+        return queue-&gt;front-&gt;next == NULL;
+    }
+
+    // Enqueue 
+    void Enqueue(Element_type x, Queue queue){
+        P_Node temp = (P_Node)malloc(sizeof(struct Node));
+        temp-&gt;data = x;
+        temp-&gt;next = NULL;
+        if(is_empty(queue)){
+            queue-&gt;front-&gt;next = temp;
+            queue-&gt;rear = temp;
+        }else{
+            queue-&gt;rear-&gt;next = temp;
+            queue-&gt;rear = temp;
+        }   
+    }
+
+    // Dequeue
+    Element_type Dequeue(Queue queue){
+        if(is_empty(queue)){
+            printf(&quot;The queue is empty, have no element to dequeue.\n&quot;);
+            return -1;
+        }
+        P_Node temp = queue-&gt;front-&gt;next;
+        Element_type ret = temp-&gt;data;    // ret is the data dequeued.
+        queue-&gt;front-&gt;next = temp-&gt;next;
+        free(temp);
+        return ret;
+    }
+
+    // make empty
+    void Empty(Queue queue){
+        P_Node temp = queue-&gt;front;
+        while(temp-&gt;next != NULL){
+            P_Node free_node = temp-&gt;next;
+            temp-&gt;next = free_node-&gt;next;
+            free(free_node); 
+        }
+        queue-&gt;front-&gt;next = NULL;
+        queue-&gt;rear = queue-&gt;front;    // because the memery of rear is released,can't use queue-&gt;rear-&gt;next to set it as NULL.
+    }
+
+    // Treverse
+    void Traverse(Queue queue){
+        P_Node temp = queue-&gt;front;
+        int i = 1;
+        while(temp-&gt;next != NULL){
+            printf(&quot;The %dth elelemt in queue is %d.\n&quot;,i++,temp-&gt;next-&gt;data);
+            temp = temp-&gt;next;
+        }
+    }
+</code></pre>
+
+<hr />
+
+<h4 id="main-c">main.c</h4>
+
+<p>main.c for test.
+        #include &ldquo;queue.h&rdquo;</p>
+
+<pre><code>    int main(void){
+        Queue m_queue = MakeQueue(); 
+        printf(&quot;The size of queue is %d.\n&quot;,size(m_queue));
+        printf(&quot;Enqueue some elements into the queue.\n&quot;);
+        int i = 0;
+        for(i=0;i!=4;i++){
+            Enqueue(i,m_queue);
+        } 
+        printf(&quot;The size of queue is %d.\n&quot;,size(m_queue));
+        Traverse(m_queue);
+
+        printf(&quot;Dequeue some element out of the queue.\n&quot;);
+        for(i=0;i!=2;i++){
+            Dequeue(m_queue);
+        }
+        Traverse(m_queue);
+        Enqueue(5,m_queue);
+        Traverse(m_queue);
+        printf(&quot;The size of queue now is %d.\n&quot;,size(m_queue));
+        printf(&quot;Now clear elements in the queue.\n&quot;);
+        Empty(m_queue);
+        printf(&quot;The size of queue now is %d.\n&quot;,size(m_queue));
+            for(i=0;i!=4;i++){
+            Enqueue(i,m_queue);
+        } 
+        printf(&quot;The size of queue is %d.\n&quot;,size(m_queue));
+        Traverse(m_queue);
+    }
+</code></pre>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+
+    </body>
+
+</html>
+

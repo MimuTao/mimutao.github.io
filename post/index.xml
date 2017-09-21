@@ -6,10 +6,19 @@
     <description>Recent content in POSTs on Biu~</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 Sep 2017 19:38:12 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 21 Sep 2017 21:05:26 +0800</lastBuildDate>
     
 	<atom:link href="http://mimutao.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Basic study about queue with linklist</title>
+      <link>http://mimutao.github.io/post/queue_link/</link>
+      <pubDate>Thu, 21 Sep 2017 21:05:26 +0800</pubDate>
+      
+      <guid>http://mimutao.github.io/post/queue_link/</guid>
+      <description>Queue: Use c and linklist queue.h  #ifndef _QUEUE_H #define _QUEUE_H #include&amp;lt;stdio.h&amp;gt; #include&amp;lt;stdbool.h&amp;gt; #include&amp;lt;malloc.h&amp;gt; typedef int Element_type; typedef struct Node *P_Node; typedef struct QNode *Queue; struct Node{ Element_type data; P_Node next; }; struct QNode{ P_Node front; // front is a pointer to the front of queue. P_Node rear; // rear is a pointer to the rear of the queue. }; // function declaration Queue MakeQueue(); int size(Queue queue); bool is_empty(Queue queue); void Enqueue(Element_type x, Queue queue); Element_type Dequeue(Queue queue); void Empty(Queue queue); void Traverse(Queue queue); #endif  queue.</description>
+    </item>
     
     <item>
       <title>Basic study about Queue with array</title>
