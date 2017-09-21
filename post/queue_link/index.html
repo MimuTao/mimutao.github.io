@@ -254,10 +254,11 @@
 
 <h4 id="main-c">main.c</h4>
 
-<p>main.c for test.
-        #include &ldquo;queue.h&rdquo;</p>
+<p>main.c for test.</p>
 
-<pre><code>    int main(void){
+<pre><code>    #include &quot;queue.h&quot;
+
+    int main(void){
         Queue m_queue = MakeQueue(); 
         printf(&quot;The size of queue is %d.\n&quot;,size(m_queue));
         printf(&quot;Enqueue some elements into the queue.\n&quot;);
